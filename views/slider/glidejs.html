@@ -1,0 +1,22 @@
+{{ css('glide.css', 'all', 'gallery') }}
+<div class="glidejs" id="{{ $_id }}">
+	<ul class="slides">
+		{{ loop($files as $file) }}
+		<li class="slide">
+			<img src="{{ image_url($file->url_data, $_width, $_height) }}" title="{{ $file->label}}" alt="{{ $file->label}}">
+		</li>
+		{{ endloop }}
+	</ul>
+</div>
+
+{{ js('sliders/jquery.glide.min.js', 'gallery') }}
+
+<script>
+    $(function(){
+		$(".glidejs").glide({
+			{{ if('' !== $_options) }}
+			{{ $_options }}
+			{{ endif }}
+		});
+    });
+</script>

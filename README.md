@@ -1,4 +1,3 @@
-gallery
-=======
+# Gallery Module
 
-Reborn Gallery Module
+Reborn CMS Gallery Module.

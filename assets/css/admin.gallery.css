@@ -1,0 +1,233 @@
+.album {
+	width: 200px;
+	height: 250px;
+	text-align: center;
+	background: #f9f9f9;
+	border: 1px solid #CBCBCB;
+	margin: 0 30px 30px 0;
+	padding-bottom: ;
+	float: left;
+	position: relative;
+	-webkit-border-radius: 4px 4px 0 0;
+	   -moz-border-radius: 4px 4px 0 0;
+            border-radius: 4px 4px 0 0;
+}
+
+.album img {
+	margin: 10px 0;
+}
+
+.album-name {
+	max-width: 180px;
+	padding: 10px;
+	display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.album-actions {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 10px 5px;
+	background: #E6E6E6;
+	border-top: 1px solid #CBCBCB;
+	color: #999;
+}
+
+.album-actions a {
+	margin: 0 5px;
+}
+
+.album-actions .manage-file {
+	margin-left: 0;
+}
+.album-actions .delete-album {
+	margin-right: 0;
+}
+
+#gallery-files {
+	background: #f9f9f9;
+	padding: 10px;
+}
+#gallery-title h3 {
+	padding-bottom: 10px;
+	font-size: 16px;
+	float: left;
+	margin-right: 40px;
+}
+
+#gallery-actions {
+	padding: 10px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #efefef;
+	border-top: 1px solid #efefef;
+}
+
+#files-area {
+	position: relative;
+}
+
+#sortable {
+	margin-left: 0;
+}
+#sortable li {
+	list-style: none;
+	margin-bottom: 20px;
+	font-weight: normal;
+	border: none;
+}
+
+.file-field {
+	background: #fff;
+	border: 1px solid #efefef;
+	padding: 10px;
+}
+.file-field-remove {
+	height: 60px;
+	float: left;
+	width: 50px;
+	position: relative;
+}
+.ax-loading {
+	background: none repeat scroll 0 0 #e8e8e8;
+    color: #0FCC77;
+    left: 20px;
+    padding: 7px 5px;
+    position: absolute;
+    top: -10px;
+}
+.ax-error {
+	color: #EB3612;
+	width: 75px;
+}
+.remove-file {
+	padding: 2px 3px 2px 2px;
+	position: absolute;
+	top: -11px;
+	left: -11px;
+	border-right: 1px solid #efefef;
+	border-bottom: 1px solid #efefef;
+	background: #e8e8e8;
+}
+.remove-file i {
+	margin-right: 0;
+}
+.remove-file:hover i {
+	color: #E53738;
+}
+
+.file-field-left {
+	float: left;
+	width: 100px;
+}
+.file-field-right {
+	margin-left: 200px;
+}
+.file-field-right label {
+	/*float: none;*/
+	width: 100px;
+	margin-bottom: 10px;
+}
+.file-field-caption {
+	float: left;
+	width: 45%;
+}
+.file-field-desc {
+	float: right;
+	width: 45%;
+}
+.file-field-desc textarea {
+	height: 55px;
+}
+
+/* Media Manager View */
+#manager {
+	position: relative;
+	height: 530px;
+	max-height: 530px;
+    overflow-y: auto;
+}
+#manager-bar {
+	float: left;
+	width: 190px;
+	height: 530px;
+	max-height: 530px;
+    overflow-y: auto;
+	border-right: 1px solid #E6E6E6;
+	-moz-box-shadow:    -1px 0 1px #F8F8F8 inset;
+	-webkit-box-shadow: -1px 0 1px #F8F8F8 inset;
+	box-shadow:         -1px 0 1px #F8F8F8 inset;
+	position: relative;
+	top: 0;
+	bottom: 0;
+}
+#manager-action {
+	padding: 20px 20px 10px 10px;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+#manager-action .btn {
+	display: block;
+}
+
+#selected-wrap {
+	margin-top: 60px;
+	padding: 3px 10px 10px 10px;
+	max-height: 455px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#selected {
+	margin: 0;
+}
+#selected li {
+	list-style: none;
+	color: #333;
+	padding: 5px 0 5px 5px;
+	border-bottom: 1px solid #F2F2F2;
+}
+#selected li:last-child {
+	border-bottom: none;
+}
+
+#manager-content {
+	margin-left: 225px;
+	height: 530px;
+	max-height: 530px;
+    overflow-y: auto;
+}
+
+.item {
+	background: #efefef;
+	float: left;
+	margin: 0 20px 20px 0;
+	padding: 10px;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+.item.is-checked {
+	border: 1px solid #0F7692;
+	background: #D4DFF5;
+}
+.item-thumb {
+	width: 80px;
+	height: 60px;
+	padding: 5px;
+	background: #fff;
+	border: 1px solid #ddd;
+}
+.item-meta {
+	padding: 5px;
+	text-align: center;
+	max-width: 80px;
+	display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

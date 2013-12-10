@@ -1,0 +1,16 @@
+<div id="gallery" class="clearfix">
+
+	{{ loop($galleries as $gallery) }}
+	<div class="album">
+		<img src="{{ $gallery->cover_url }}">
+		<p class="album-name tipsy-tip" title="{{ $gallery->name }}">{{ $gallery->name }}</p>
+		<div class="album-actions">
+			<a href="{{ adminUrl('gallery/add-files/'.$gallery->id) }}" class="manage-file">File</a>
+			|
+			<a href="{{ adminUrl('gallery/edit/'.$gallery->id) }}">Edit</a>
+			|
+			<a href="{{ adminUrl('gallery/delete/'.$gallery->id) }}" class="delete-gallery">Delete</a>
+		</div>
+	</div>
+	{{ endloop }}
+</div>

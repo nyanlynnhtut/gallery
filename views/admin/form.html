@@ -1,0 +1,39 @@
+{{ Form::start(Uri::current()) }}
+
+	<div class="form-block">
+		{{ Form::label('Name', 'name') }}
+		<div class="form-right-block">
+			{{ Form::text('name', $gallery->name) }}
+			<p class="msg error">{{ $errors->name }}</p>
+		</div>
+	</div>
+
+	<div class="form-block">
+		{{ Form::label('Description', 'description') }}
+		<div class="form-right-block">
+			{{ Form::cksimple('description', $gallery->description) }}
+			<p class="msg error">{{ $errors->description }}</p>
+		</div>
+	</div>
+
+	<div class="form-block">
+		{{ Form::label('Status', 'status') }}
+		<div class="form-right-block">
+			{{ Form::status('status', $gallery->status) }}
+			<p class="msg error">{{ $errors->status }}</p>
+		</div>
+	</div>
+
+	<div class="form-block">
+		{{ Form::label('Cover Photo', 'cover') }}
+		<div class="form-right-block">
+			{{ Form::thumbnail('cover', $gallery->cover, 100 ) }}
+		</div>
+	</div>
+
+	<div class="form-block form-action button-wrapper">
+		{{ Form::submit('save', 'Save', array('class' => 'btn btn-green')) }}
+		<a href="{{ adminUrl('gallery') }}" class="btn btn-red">Cancel</a>
+	</div>
+
+{{ Form::end() }}

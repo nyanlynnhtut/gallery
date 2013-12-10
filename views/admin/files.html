@@ -1,0 +1,80 @@
+<div id="gallery-files">
+
+	{{ Form::start(Uri::current()) }}
+
+	<div id="gallery-title" class="clearfix">
+		<h3>Add Files To Gallery "{{ $gallery->name }}"</h3>
+		{{ Form::submit('save', 'Save', array('class' => 'btn btn-green')) }}
+	</div> <!-- end of #gallery-title -->
+
+	<div id="gallery-actions">
+		<a href="{{ adminUrl('gallery/search/media') }}" class="btn btn-black" id="from-media">Add From Media Manager</a>
+		<a href="" class="btn btn-black" id="from-url">Add Url</a>
+	</div> <!-- end of #gallery-actions -->
+
+	<div id="files-area">
+		<!-- Content Area for $.tmpl -->
+		<ul id="sortable">
+			{{ loop($gallery->files as $file) }}
+			<li class="ui-state-default">
+			    <div class="file-field  clearfix">
+			        <div class="file-field-remove">
+			            <a href="{{ adminUrl('gallery/remove-file/'.$file->id) }}" class="remove-file confirmation tipsy-tip" title="Remove" data-key="{{ $file->id }}">
+			                <i class="icon-circleclose icon-gray"></i>
+			            </a>
+			        </div>
+
+			        <div class="file-field-left">
+			            <img src="{{ $file->url }}/80/60">
+			            <input type="hidden" name="files[]" value="{{ $file->url_data }}">
+			        </div>
+			        <div class="file-field-right clearfix">
+			            <div class="file-field-caption">
+			                <label>Caption Label</label>
+			                <input type="text" name="file_label[]" value="{{ $file->label }}" >
+			                <input type="hidden" name="file_width[]" value="{{ $file->width }}">
+                			<input type="hidden" name="file_height[]" value="{{ $file->height }}">
+			            </div>
+			            <div class="file-field-desc">
+			                <label>Description</label>
+			                <textarea name="file_description[]" >{{ $file->description }}</textarea>
+			            </div>
+			        </div>
+			    </div>
+			</li>
+			{{ endloop }}
+		</ul>
+	</div> <!-- end of #files-area -->
+
+	{{ Form::submit('bottom_save', 'Save', array('class' => 'btn btn-green')) }}
+
+	{{ Form::end() }}
+
+</div> <!-- end of #gallery-files -->
+
+<script type="text/javascript">
+
+	$('#from-media').colorbox({
+        //scrollable: false,
+        width: "850px",
+        height: "600px",
+        opacity: 0.5,
+        onComplete : function() {
+            // /$.colorbox.resize();
+        }
+    });
+
+    // Add Image to Template
+    function make(data)
+    {
+        template = $("#fileField").template();
+        $.tmpl( template, data).appendTo( "#sortable" );
+    }
+
+   // $(function() {
+		$( "#sortable" ).livequery(function(){
+			$(this).sortable();
+		});
+		/*$( "#sortable" ).disableSelection();*/
+	//});
+</script>

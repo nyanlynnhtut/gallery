@@ -1,0 +1,105 @@
+<script id="indexTmpl" type="text/x-jquery-tmpl">
+    <div class="item clearfix" data-name="${name}" data-value="${filename}" data-id="g-${id}${width}${height}" data-key="${id}" data-width="${width}" data-height="${height}">
+        <div class="item-thumb">
+        	<img src="{{ rbUrl('image/${filename}/80/60') }}" title="${name}" alt="${alt_text}">
+        </div>
+        <div class="item-meta">${name}</div>
+        <div class="item-meta">${width} x ${height}</div>
+    </div>
+</script>
+
+<div id="manager" class="clearfix">
+    <div id="manager-bar">
+        <div id="manager-action">
+            <span class="btn btn-blue" id="add-btn">Add</span>
+        </div> <!-- end of #manager-action -->
+        <div id="selected-wrap">
+            <ul id="selected">
+            </ul>
+        </div> <!-- end of #selected-wrap -->
+    </div>  <!-- end of #manager-bar -->
+
+    <div id="manager-content" class="clearfix">
+    </div> <!-- end of #manager-content -->
+</div> <!-- end of #manager -->
+
+<script id="fileField" type="text/x-jquery-tmpl">
+<li class="ui-state-default">
+    <div class="file-field  clearfix">
+        <div class="file-field-remove">
+            <a href="#" class="remove-file confirmation tipsy-tip" title="Remove">
+                <i class="icon-circleclose icon-gray"></i>
+            </a>
+        </div>
+
+        <div class="file-field-left">
+            <img src="{{ rbUrl('image/${value}/80/60') }}">
+            <input type="hidden" name="files[]" value="${value}">
+        </div>
+        <div class="file-field-right clearfix">
+            <div class="file-field-caption">
+                <label>Caption Label</label>
+                <input type="text" name="file_label[]" >
+                <input type="hidden" name="file_width[]" value="${width}">
+                <input type="hidden" name="file_height[]" value="${height}">
+            </div>
+            <div class="file-field-desc">
+                <label>Description</label>
+                <textarea name="file_description[]" ></textarea>
+            </div>
+        </div>
+    </div>
+</li>
+</script>
+
+<script type="text/javascript">
+	var images = {{ $images }};
+
+	template = $("#indexTmpl").template();
+	$.tmpl( template, images).appendTo( "#manager-content" );
+
+    // Selected Data Container
+    var selected = [];
+
+    // Image Select
+    $('.item').on('click', function(e){
+        e.preventDefault();
+        $(this).toggleClass('is-checked');
+        var name = $(this).data('name'),
+            id = $(this).data('id'),
+            key = $(this).data('key'),
+            val = $(this).data('value'),
+            width = $(this).data('width'),
+            height = $(this).data('height'),
+            box = $('input[value="selected-items"]');
+
+        if ($(this).hasClass('is-checked')) {
+            $('#selected').append('<li id="'+id+'">'+name+'</li>');
+            selected.push({value: val, width : width, height: height});
+            file_is_new.push(key);
+
+        } else {
+            // Remove li form ul#selected and slected data container
+            $('#'+id).remove();
+            for (var i = selected.length - 1; i >= 0; i--) {
+                if (selected[i].value == val) {
+                    selected.splice(i, 1);
+                }
+            }
+            var index = file_is_new.indexOf(key);
+            file_is_new.splice(index, 1);
+        }
+    });
+
+    // Add Images
+    $('#add-btn').on('click', function(){
+        console.log(selected);
+        /*var data = [];
+        for (var i = 0; i < selected.length; i++) {
+            data.push({ "image" : selected[i] });
+        };*/
+        console.log(file_is_new);
+        // From files.html
+        make(selected);
+    });
+</script>

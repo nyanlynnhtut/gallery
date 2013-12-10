@@ -1,0 +1,27 @@
+{{ ifset($gallery_style) }}
+	<link rel="stylesheet" type="text/css" href="{{ $gallery_style }}">
+{{ endif }}
+
+<div id="gallery-container" class>
+
+	{{ loop($galleries as $gallery) }}
+	<div class="gallery-album">
+
+		<img src="{{ $gallery->cover_url }}" alt="{{ $gallery->name }}" title="{{ $gallery->name }}" class="gallery-cover">
+
+		<div class="gallery-meta">
+			<div class="gallery-name" title="{{ $gallery->name }}">
+				{{ $gallery->name }}
+			</div> <!-- end of .gallery-name -->
+
+			<div class="gallery-description" >
+				{{ html_entity_decode($gallery->description) }}
+			</div> <!-- end of .gallery-description -->
+		</div> <!-- end of .gallery-meta -->
+
+		<a href="{{ rbUrl('gallery/'.$gallery->slug) }}" class="gallery-view">View</a>
+
+	</div> <!-- end of .gallery-album -->
+	{{ endloop }}
+
+</div> <!-- end of #gallery-container -->

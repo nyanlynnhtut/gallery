@@ -1,5 +1,6 @@
+{{ css('admin.gallery.css', 'gallery') }}
 <script id="indexTmpl" type="text/x-jquery-tmpl">
-    <div class="item clearfix" data-name="${name}" data-value="${filename}" data-id="g-${id}${width}${height}" data-key="${id}" data-width="${width}" data-height="${height}">
+    <div class="item clearfix ${item_class}" data-name="${name}" data-value="${filename}" data-id="g-${id}${width}${height}" data-key="${id}" data-width="${width}" data-height="${height}">
         <div class="item-thumb">
         	<img src="{{ rbUrl('image/${filename}/80/60') }}" title="${name}" alt="${alt_text}">
         </div>
@@ -20,6 +21,16 @@
     </div>  <!-- end of #manager-bar -->
 
     <div id="manager-content" class="clearfix">
+        <div id="manager-filter">
+            {{ Form::start(admin_url('gallery/search/folder'), 'filter', false, array('id' => 'folder-filter')) }}
+            {{ Form::select('folder_id', $folders) }}
+            {{ Form::submit('search', 'Search', array('id' => 'filter_search', 'class' => 'btn btn-dark')) }}
+            <span id="loading-text" style="color: #999;padding-left:10px;"></span>
+            {{ Form::end() }}
+        </div> <!-- end of #manager-filter -->
+
+        <div id="manager-content-body">
+        </div> <!-- end of #manager-content-body -->
     </div> <!-- end of #manager-content -->
 </div> <!-- end of #manager -->
 
@@ -33,7 +44,7 @@
         </div>
 
         <div class="file-field-left">
-            <img src="{{ rbUrl('image/${value}/80/60') }}">
+            <img src="{{ url('image/${value}/80/60') }}">
             <input type="hidden" name="files[]" value="${value}">
         </div>
         <div class="file-field-right clearfix">
@@ -53,16 +64,17 @@
 </script>
 
 <script type="text/javascript">
+    // Selected Data Container and selected item's id container
+    var selected = [],
+        file_is_new = [];
+
 	var images = {{ $images }};
 
 	template = $("#indexTmpl").template();
-	$.tmpl( template, images).appendTo( "#manager-content" );
-
-    // Selected Data Container
-    var selected = [];
+	$.tmpl( template, preapre_items(images)).appendTo( "#manager-content-body" );
 
     // Image Select
-    $('.item').on('click', function(e){
+    $('.item').livequery('click', function(e){
         e.preventDefault();
         $(this).toggleClass('is-checked');
         var name = $(this).data('name'),
@@ -93,13 +105,57 @@
 
     // Add Images
     $('#add-btn').on('click', function(){
-        console.log(selected);
-        /*var data = [];
-        for (var i = 0; i < selected.length; i++) {
-            data.push({ "image" : selected[i] });
-        };*/
-        console.log(file_is_new);
         // From files.html
         make(selected);
     });
+
+    // Filter by Folder
+    $('#filter_search').on('click', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: SITEURL + ADMIN + '/gallery/search/folder',
+            type: 'POST',
+            data: $('#folder-filter').serialize(),
+            beforeSend: function() {
+                $('#loading-text').text('Loading....');
+            },
+            complete: function() {
+                $('#loading-text').text('');
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $('#loading-text').text('');
+                $('#loading-text').append('<strong style="color:#f00;">'+errorThrown+'</strong>');
+            },
+            success: function(data) {
+                template = $("#indexTmpl").template();
+                $( "#manager-content-body" ).html('');
+                $.tmpl( template, preapre_items(data)).appendTo( "#manager-content-body" );
+            }
+        });
+    });
+
+    // Is Choosed condition checking function for $.tmpl template
+    function preapre_items(items) {
+        $.each(items, function(index, value) {
+            if (inArray(value.id, file_is_new) > 0) {
+                value.item_class = ' is-checked';
+            } else {
+                value.item_class = '';
+            }
+        });
+
+        return items;
+    }
+
+    // inArray function from
+    // http://stackoverflow.com/questions/784012/javascript-equivalent-of-phps-in-array
+    function inArray(needle, haystack) {
+        var length = haystack.length;
+        for(var i = 0; i < length; i++) {
+            if(haystack[i] == needle) return true;
+        }
+        return false;
+    }
+
 </script>

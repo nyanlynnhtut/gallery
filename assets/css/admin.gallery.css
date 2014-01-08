@@ -196,6 +196,12 @@
 	border-bottom: none;
 }
 
+#manager-filter {
+	padding: 5px;
+	border: 1px solid #efefef;
+	margin: 0 10px 10px 0;
+}
+
 #manager-content {
 	margin-left: 225px;
 	height: 530px;

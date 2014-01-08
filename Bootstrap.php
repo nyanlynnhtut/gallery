@@ -19,7 +19,7 @@ class Bootstrap extends \Reborn\Module\AbstractBootstrap
 	 */
 	public function adminMenu(\Reborn\Util\Menu $menu, $modUri)
 	{
-		$menu->add('media', 'Gallery', $modUri, 'content', 25);
+		$menu->add('gallery', 'Gallery', $modUri, 'media', 40);
 	}
 
 	/**

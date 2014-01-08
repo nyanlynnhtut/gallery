@@ -11,6 +11,7 @@ class GalleryController extends \AdminController
 {
 	public function before()
 	{
+		$this->menu->activeParent('media');
 		$this->template->style('admin.gallery.css', 'gallery')
 						->script('jquery.tmpl.min.js', 'gallery')
 						->script('gallery.js', 'gallery', 'footer');

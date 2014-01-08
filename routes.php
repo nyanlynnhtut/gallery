@@ -13,11 +13,11 @@ Route::add('@admin/gallery/remove-file/{int:id}', 'Gallery\Admin\Gallery::remove
 
 // Image API Search Routes
 Route::group('@admin/gallery/search', function(){
-	Route::get('images', 'Gallery\Admin\Search::images', 'gallery_image_search');
+	Route::add('images', 'Gallery\Admin\Search::images', 'gallery_image_search');
 
-	Route::get('folder', 'Gallery\Admin\Search::folder', 'gallery_folder_search');
+	Route::add('folder', 'Gallery\Admin\Search::folder', 'gallery_folder_search');
 
-	Route::get('media', 'Gallery\Admin\Search::media', 'gallery_media_manager');
+	Route::add('media', 'Gallery\Admin\Search::media', 'gallery_media_manager');
 });
 
 // Frontend Routes

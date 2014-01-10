@@ -1,20 +1,14 @@
 {{ css('slidejs.css', 'all', 'gallery') }}
-<div class="slidejs" id="{{ $_id }}">
+<div class="{{ $_class }}" id="{{ $_id }}">
 	{{ loop($files as $file) }}
-	<img src="{{ image_url($file->url_data, $_width, $_height) }}" title="{{ $file->label}}" alt="{{ $file->label}}">
+	<img src="{{ image_url($file->url_data, $_width, $_height) }}" title="{{ $file->label }}" alt="{{ $file->label }}">
 	{{ endloop }}
 </div>
 {{ js('sliders/jquery.slides.min.js', 'gallery') }}
 <script>
+$(document).ready(function(){
     $(function(){
-		$(".slidejs").slidesjs({
-			{{ if ($_height !== 0) }}
-			height: {{ $_height }},
-			{{ endif }}
-			width: {{ $_width }}
-			{{ if('' !== $_options) }}
-			,{{ $_options }}
-			{{ endif }}
-		});
+		$(".slidejs").slidesjs({{ $_options }});
     });
+});
 </script>

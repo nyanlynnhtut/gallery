@@ -2,7 +2,7 @@
 
 namespace Gallery\Decorator;
 
-class GlideJs extends Base
+class GlideJs extends AbstractBase
 {
 	/**
 	 * Slider wrapper element's ID attribute
@@ -59,5 +59,15 @@ class GlideJs extends Base
 		}
 
 		return $this;
+	}
+
+	/**
+	 * Get class attribute value string for slider wrapper
+	 *
+	 * @return string
+	 **/
+	public function getClassString()
+	{
+		return is_null($this->classes) ? 'glidejs' : 'glidejs '.$this->classes;
 	}
 }

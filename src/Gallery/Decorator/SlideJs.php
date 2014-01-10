@@ -2,7 +2,7 @@
 
 namespace Gallery\Decorator;
 
-class SlideJs extends Base
+class SlideJs extends AbstractBase
 {
 	/**
 	 * Slider wrapper element's ID attribute
@@ -85,6 +85,16 @@ class SlideJs extends Base
 		$this->options['play'] =  $this->mergeOption('play', $value);
 
 		return $this;
+	}
+
+	/**
+	 * Get class attribute value string for slider wrapper
+	 *
+	 * @return string
+	 **/
+	public function getClassString()
+	{
+		return is_null($this->classes) ? 'slidejs' : 'slidejs '.$this->classes;
 	}
 
 	/**

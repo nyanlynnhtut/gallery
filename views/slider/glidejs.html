@@ -1,5 +1,5 @@
 {{ css('glide.css', 'all', 'gallery') }}
-<div class="glidejs" id="{{ $_id }}">
+<div class="{{ $_class }}" id="{{ $_id }}">
 	<ul class="slides">
 		{{ loop($files as $file) }}
 		<li class="slide">
@@ -12,11 +12,9 @@
 {{ js('sliders/jquery.glide.min.js', 'gallery') }}
 
 <script>
+$(document).ready(function(){
     $(function(){
-		$(".glidejs").glide({
-			{{ if('' !== $_options) }}
-			{{ $_options }}
-			{{ endif }}
-		});
+		$(".glidejs").glide({{ $_options }});
     });
+});
 </script>

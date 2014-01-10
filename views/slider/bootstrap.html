@@ -1,0 +1,36 @@
+<div id="{{ $_id }}" class="{{ $_class }}" data-ride="carousel" {{ is_null($bs_interval) ? '' : 'data-interval="'.$bs_interval.'"' }}>
+    {{ if($bs_use_indicator) }}
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        {{ loop($files as $k => $file) }}
+        <li data-target="#{{ $_id }}" data-slide-to="{{ $k }}" class="{{ ($k < 1) ? ' active' : '' }}"></li>
+        {{ endloop }}
+    </ol>
+    {{ endif }}
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        {{ loop($files as $k => $file) }}
+        <div class="item{{ ($k < 1) ? ' active' : '' }}">
+            <img src="{{ image_url($file->url_data, $_width, $_height) }}" title="{{ $file->label }}" alt="{{ $file->label}}">
+
+            {{ if($bs_use_caption) }}
+            <div class="carousel-caption">
+                <h3>{{ $file->label }}</h3>
+                <p>{{ $file->description }}</p>
+            </div>
+            {{ endif }}
+        </div>
+        {{ endloop }}
+    </div>
+
+    {{ if($bs_use_controls) }}
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+    {{ endif }}
+</div>

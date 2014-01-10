@@ -5,7 +5,7 @@ namespace Gallery\Decorator;
 use Reborn\Cores\Facade;
 use Gallery\Presenter\GalleryPresenter;
 
-class Base
+abstract class AbstractBase
 {
 	/**
 	 * Application (IOC) container instance
@@ -34,6 +34,13 @@ class Base
 	 * @var string
 	 **/
 	protected $id = 'gallery-slider-wrapper';
+
+	/**
+	 * Class attribute for slider wrapper element.
+	 *
+	 * @var string
+	 **/
+	protected $classes;
 
 	/**
 	 * Slider view file name
@@ -95,19 +102,52 @@ class Base
 	}
 
 	/**
+	 * Set slider wrapper's ID attribute.
+	 *
+	 * @param string
+	 * @return \Gallery\Decorator\Base
+	 **/
+	public function id($id)
+	{
+		$this->id = (string) $id;
+
+		return $this;
+	}
+
+	/**
+	 * Set slider wrapper's class attribute.
+	 *
+	 * @param string
+	 * @return \Gallery\Decorator\Base
+	 **/
+	public function classes($classes)
+	{
+		$this->classes = (string) $classes;
+
+		return $this;
+	}
+
+	/**
 	 * Render slider view
 	 *
+	 * @param string $id
 	 * @return string
 	 */
 	public function render()
 	{
 		if (is_null($this->gallery)) return null;
 
-		$options = $this->getSliderOptions();
+		$options = array_merge(array('width' => $this->width), $this->options);
 
-		$view = $this->app->view;
+		if ($this->height > 0) {
+			$options['height'] = $this->height;
+		}
 
-		$view->set(array(
+		$options = \ToolKit::jsEncode($options);
+
+		$view_instance = $this->app->view;
+
+		$view_instance->set(array(
 			'_width' => $this->width,
 			'_height' => $this->height,
 			'_options' => $options,
@@ -115,11 +155,18 @@ class Base
 			'files' => $this->gallery->files
 		));
 
-		$view->set('_id', $this->id);
+		$view_instance->set('_id', $this->id);
+
+		$view_instance->set('_class', $this->getClassString());
 
 		$file = GALLERY_VIEW.'slider'.DS.$this->view.'.html';
 
-		return $view->render($file);
+		// Check for custom rendering method.
+		if (method_exists($this, 'customRender')) {
+			return $this->customRender($view_instance, $file);
+		}
+
+		return $view_instance->render($file);
 	}
 
 	/**
@@ -130,72 +177,5 @@ class Base
 	public function __toString()
 	{
 		return $this->render();
-	}
-
-	/**
-	 * Get Slider Options string
-	 *
-	 * @return string
-	 **/
-	protected function getSliderOptions()
-	{
-		$options = '';
-
-		foreach ($this->options as $key => $value) {
-			$options .= ','.$key.': '.$this->getOptionValue($value);
-		}
-
-		return ltrim($options,',');
-	}
-
-	/**
-	 * Get option vlaue.
-	 *
-	 * @param mixed $value
-	 * @return string
-	 **/
-	protected function getOptionValue($value)
-	{
-		if (is_numeric($value)) {
-			return $value;
-		} elseif (is_bool($value)) {
-			return $this->getBooleanValue($value);
-		} elseif (is_array($value)) {
-			return $this->getArrayValue($value);
-		}
-
-		return '"'.$value.'"';
-	}
-
-	/**
-	 * Get boolean type value
-	 *
-	 * @param string $value
-	 * @return string
-	 **/
-	protected function getBooleanValue($value)
-	{
-		if (1 == $value) {
-			return 'true';
-		}
-
-		return 'false';
-	}
-
-	/**
-	 * Get boolean type value
-	 *
-	 * @param string $value
-	 * @return string
-	 **/
-	protected function getArrayValue($value)
-	{
-		$val = '';
-
-		foreach ($value as $k => $v) {
-			$val .= ','.$k.': '.$this->getOptionValue($v);
-		}
-
-		return '{'.ltrim($val, ',').'}';
 	}
 }

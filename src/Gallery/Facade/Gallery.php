@@ -4,6 +4,7 @@ namespace Gallery\Facade;
 
 use Gallery\Decorator\SlideJs;
 use Gallery\Decorator\GlideJs;
+use Gallery\Decorator\Bootstrap;
 use Gallery\Presenter\GalleryPresenter;
 use Gallery\Model\Gallery as GalleryModel;
 
@@ -53,6 +54,27 @@ class Gallery
 	}
 
 	/**
+	 * Get Gallery File Slider with Bootstrap 3.
+	 *
+	 * Bootstrap Site : http://getbootstrap.com/javascript/#carousel
+	 *
+	 * @param string $gallery Gallery Name
+	 * @param int $width Slider image width for slidejs
+	 * @param int $height Slider image height for slidejs
+	 * @return \Gallery\Decorator\SlideJs
+	 **/
+	public static function bootstrap($gallery, $width = 940, $height = 0)
+	{
+		$galleries = static::getGallery($gallery);
+
+		$bootstrap = new Bootstrap($galleries, $width, $height);
+
+		$bootstrap->id(slug($gallery).'_slider');
+
+		return $bootstrap;
+	}
+
+	/**
 	 * Get Gallery File Slider with SlideJS 3.
 	 *
 	 * Slide JS Site : http://www.slidesjs.com/
@@ -66,7 +88,11 @@ class Gallery
 	{
 		$galleries = static::getGallery($gallery);
 
-		return new SlideJs($galleries, $width, $height);
+		$slidejs = new SlideJs($galleries, $width, $height);
+
+		$slidejs->id(slug($gallery).'_slider');
+
+		return $slidejs;
 	}
 
 	/**
@@ -83,7 +109,11 @@ class Gallery
 	{
 		$galleries = static::getGallery($gallery);
 
-		return new GlideJs($galleries, $width, $height);
+		$glidejs = new GlideJs($galleries, $width, $height);
+
+		$glidejs->id(slug($gallery).'_slider');
+
+		return $glidejs;
 	}
 
 	/**

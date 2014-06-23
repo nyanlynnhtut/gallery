@@ -48,6 +48,20 @@ class FilePresenter extends Presentation
     }
 
     /**
+     * Has a Target URL Values for this File?
+     *
+     * @return boolean
+     **/
+    public function attributeHasTargetUrl()
+    {
+        if ( isset($this->resource->target_url) ) {
+            return strlen($this->resource->target_url) > 4;
+        }
+
+        return false;
+    }
+
+    /**
 	 * Get Gallery File's File URL.
 	 *
 	 * @return string

@@ -16,7 +16,13 @@
 
             {{ if($bs_use_caption) }}
             <div class="carousel-caption">
+                {{ if($file->has_target_url) }}
+                <h3>
+                    <a href="{{ $file->target_url }}">{{ $file->label }}</a>
+                </h3>
+                {{ else }}
                 <h3>{{ $file->label }}</h3>
+                {{ endif }}
                 <p>{{ $file->description }}</p>
             </div>
             {{ endif }}

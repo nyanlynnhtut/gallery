@@ -94,6 +94,14 @@ class GalleryInstaller extends \Reborn\Module\AbstractInstaller
 		}
 	}
 
-	public function upgrade($dbVersion, $prefix = null) {}
+	public function upgrade($dbVersion, $prefix = null)
+	{
+		if ($dbVersion == '1.0') {
+			// Add target url field in gallery file
+			\Schema::table($prefix.'gallery_files', function ($table) {
+                $table->string('target_url')->nullable();
+            });
+		}
+	}
 
 }

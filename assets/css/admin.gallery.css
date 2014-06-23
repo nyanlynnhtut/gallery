@@ -135,12 +135,15 @@
 	float: left;
 	width: 45%;
 }
+.file-field-caption div {
+	margin-bottom: 10px;
+}
 .file-field-desc {
 	float: right;
 	width: 45%;
 }
 .file-field-desc textarea {
-	height: 55px;
+	height: 65px;
 }
 
 /* Media Manager View */

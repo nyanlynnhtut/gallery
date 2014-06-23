@@ -16,7 +16,7 @@ class GalleryInfo extends \Reborn\Module\AbstractInfo
 	 *
 	 * @var string
 	 **/
-	protected $version = '1.0';
+	protected $version = '1.1';
 
 	/**
 	 * Module Display name variable.

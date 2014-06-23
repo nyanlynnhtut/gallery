@@ -90,6 +90,9 @@ class Gallery extends \Eloquent
                 $list['file_id'] = $v;
                 $list['file_url'] = '';
                 $list['position'] = $i;
+                if (isset($inputs['file_target_url'][$k])) {
+                    $list['target_url'] = $inputs['file_target_url'][$k];
+                }
                 $list['width'] = $inputs['file_width'][$k];
                 $list['height'] = $inputs['file_height'][$k];
                 $list['created_at'] = $time;

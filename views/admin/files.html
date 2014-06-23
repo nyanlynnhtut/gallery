@@ -30,8 +30,14 @@
 			        </div>
 			        <div class="file-field-right clearfix">
 			            <div class="file-field-caption">
-			                <label>Caption Label</label>
-			                <input type="text" name="file_label[]" value="{{ $file->label }}" >
+			            	<div>
+			            		<label>Caption Label</label>
+			                	<input type="text" name="file_label[]" value="{{ $file->label }}" >
+			            	</div>
+			            	<div>
+			            		<label>Target URL</label>
+                				<input type="text" name="file_target_url[]" value="{{ $file->target_url }}" placeholder="URL for image target. eg (Blog Post URL)" >
+			            	</div>
 			                <input type="hidden" name="file_width[]" value="{{ $file->width }}">
                 			<input type="hidden" name="file_height[]" value="{{ $file->height }}">
 			            </div>

@@ -31,6 +31,7 @@ class GalleryInstaller extends \Reborn\Module\AbstractInstaller
 			$table->string('type');
 			$table->string('file_id');
 			$table->string('file_url');
+			$table->string('target_url')->nullable();
 			$table->integer('position');
 			$table->integer('width')->nullable();
             $table->integer('height')->nullable();

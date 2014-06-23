@@ -2,7 +2,7 @@
 
 namespace Gallery\Controller\Admin;
 
-use Input, Flash, Config, Redirect, Validation, Response;
+use Input, Flash, Config, Redirect, Validation, Response, Auth;
 use Reborn\Form\ValidationError;
 use Gallery\Model\Gallery;
 use Gallery\Presenter\GalleryPresenter;
@@ -48,6 +48,7 @@ class GalleryController extends \AdminController
 				$g->name = Input::get('name');
 				$g->slug = Input::get('name');
 				$g->description = Input::get('description');
+				$g->user_id = Auth::getUserId();
 				$g->status = Input::get('status');
 				$g->cover = Input::get('cover');
 

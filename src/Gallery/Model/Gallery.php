@@ -91,7 +91,7 @@ class Gallery extends \Eloquent
                 $list['file_url'] = '';
                 $list['position'] = $i;
                 if (isset($inputs['file_target_url'][$k])) {
-                    $list['target_url'] = $inputs['file_target_url'][$k];
+                    $list['target_url'] = urldecode($inputs['file_target_url'][$k]);
                 }
                 $list['width'] = $inputs['file_width'][$k];
                 $list['height'] = $inputs['file_height'][$k];

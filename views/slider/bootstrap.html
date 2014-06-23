@@ -12,7 +12,17 @@
     <div class="carousel-inner">
         {{ loop($files as $k => $file) }}
         <div class="item{{ ($k < 1) ? ' active' : '' }}">
+            {{ ifnot($bs_use_caption) }}
+                {{ if($file->has_target_url) }}
+                <a href="{{ $file->target_url }}">
+                    <img src="{{ image_url($file->url_data, $_width, $_height) }}" title="{{ $file->label }}" alt="{{ $file->label}}">
+                </a>
+                {{ else }}
+                <img src="{{ image_url($file->url_data, $_width, $_height) }}" title="{{ $file->label }}" alt="{{ $file->label}}">
+                {{ endif }}
+            {{ else }}
             <img src="{{ image_url($file->url_data, $_width, $_height) }}" title="{{ $file->label }}" alt="{{ $file->label}}">
+            {{ endif }}
 
             {{ if($bs_use_caption) }}
             <div class="carousel-caption">

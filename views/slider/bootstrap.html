@@ -32,11 +32,11 @@
 
     {{ if($bs_use_controls) }}
     <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
+    <a class="left carousel-control" href="{{ $_id }}" data-slide="prev">
+        <i class="{{ $bs_arrow_class['left'] }}"></i>
     </a>
-    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
+    <a class="right carousel-control" href="{{ $_id }}" data-slide="next">
+        <i class="{{ $bs_arrow_class['right'] }}"></i>
     </a>
     {{ endif }}
 </div>

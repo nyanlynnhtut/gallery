@@ -24,11 +24,15 @@ class Bootstrap extends AbstractBase
 	 * @var array
 	 **/
 	protected $bootstrap_options = array(
-					'bs_use_indicator'	=> true,
-					'bs_use_controls'	=> true,
-					'bs_use_caption'	=> true,
-					'bs_interval'		=> null
-				);
+				'bs_use_indicator'	=> true,
+				'bs_use_controls'	=> true,
+				'bs_use_caption'	=> true,
+				'bs_interval'		=> null,
+				'bs_arrow_class'	=> array(
+										'left' => 'glyphicon glyphicon-chevron-left',
+										'right' => 'glyphicon glyphicon-chevron-right'
+										)
+			);
 
 	/**
 	 * Get class attribute value string for slider wrapper
@@ -88,6 +92,15 @@ class Bootstrap extends AbstractBase
 	public function interval($value)
 	{
 		$this->bootstrap_options['bs_interval'] = (int) $value;
+
+		return $this;
+	}
+
+	public function arrowClass($left, $right)
+	{
+		$arr = array('left' => $left, 'right' => $right);
+
+		$this->bootstrap_options['bs_arrow_class'] = $arr;
 
 		return $this;
 	}

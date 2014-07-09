@@ -18,6 +18,22 @@ class Gallery
 {
 
 	/**
+	 * Check gallery has or not.
+	 *
+	 * @param string $name Gallery name
+	 * @return boolean
+	 * @author Nyan Lynn Htut
+	 **/
+	public static function has($name)
+	{
+		if ( is_null(static::getGallery($name)) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Get all Live Gallery List.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Collection

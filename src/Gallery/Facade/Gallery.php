@@ -2,6 +2,7 @@
 
 namespace Gallery\Facade;
 
+use Gallery\Decorator\Flux;
 use Gallery\Decorator\SlideJs;
 use Gallery\Decorator\GlideJs;
 use Gallery\Decorator\Bootstrap;
@@ -126,6 +127,27 @@ class Gallery
 		$galleries = static::getGallery($gallery);
 
 		$glidejs = new GlideJs($galleries, $width, $height);
+
+		$glidejs->id(slug($gallery).'_slider');
+
+		return $glidejs;
+	}
+
+	/**
+	 * Get Gallery File Slider with Flux Slider.
+	 *
+	 * Slide JS Site : http://www.joelambert.co.uk/flux/
+	 *
+	 * @param string $gallery Gallery Name
+	 * @param int $width Slider image width for slidejs
+	 * @param int $height Slider image height for slidejs
+	 * @return \Gallery\Decorator\GlideJs
+	 **/
+	public static function flux($gallery, $width = 940, $height = 0)
+	{
+		$galleries = static::getGallery($gallery);
+
+		$glidejs = new Flux($galleries, $width, $height);
 
 		$glidejs->id(slug($gallery).'_slider');
 

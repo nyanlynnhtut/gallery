@@ -1,0 +1,15 @@
+<div class="{{ $_class }}" id="{{ $_id }}">
+	{{ loop($files as $file) }}
+	<img src="{{ image_url($file->url_data, $_width, $_height) }}" title="{{ $file->label}}" alt="{{ $file->label}}">
+	{{ endloop }}
+</div>
+
+{{ js(['sliders/flux.min.js', 'sliders/flux.jquery.min.js'], 'gallery') }}
+
+<script>
+$(document).ready(function(){
+    $(function(){
+		window.myFlux = $('.flux-slider').flux({{ $_options }});
+    });
+});
+</script>
